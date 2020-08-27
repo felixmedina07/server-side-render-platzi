@@ -4,19 +4,22 @@ import { getVideoSource } from '../actions';
 import '../assets/styles/components/Player.scss';
 import NotFound from './NotFound';
 
-const Player = props => {
+const Player = (props) => {
+  // eslint-disable-next-line react/destructuring-assignment
   const { id } = props.match.params;
+  // eslint-disable-next-line react/destructuring-assignment
   const hasPlaying = Object.keys(props.playing).length > 0;
   useEffect(() => {
     props.getVideoSource(id);
   }, []);
   return hasPlaying ? (
-    <div className="Player">
+    <div className='Player'>
       <video controls autoPlay>
-        <source src={props.playing.source} type="video/mp4" />
+        {/* eslint-disable-next-line react/destructuring-assignment */}
+        <source src={props.playing.source} type='video/mp4' />
       </video>
-      <div className="Player-back">
-        <button type="button" onClick={() => props.history.goBack()}>
+      <div className='Player-back'>
+        <button type='button' onClick={() => props.history.goBack()}>
           Regresar
         </button>
       </div>
@@ -24,14 +27,14 @@ const Player = props => {
   ) : <NotFound />;
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     playing: state.playing,
-  }
-}
+  };
+};
 
 const mapDispatchToProps = {
-  getVideoSource, 
-}
+  getVideoSource,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Player);
